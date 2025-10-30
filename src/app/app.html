@@ -2,11 +2,20 @@
   <div class="mt-4">
     <h2 class="text-lg font-bold mb-2">Pokémons</h2>
     <div>
-      <div class="grid grid-cols-4 gap-4 p-4">
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-4 p-4">
         @for(pokemon of data().pokemon; track pokemon.id) {
-        <div class="bg-gray-200 p-4 rounded text-center flex flex-col">
-          <h3>{{ pokemon.name }}</h3>
-          <img src="{{ pokemon.img }}" alt="{{ pokemon.name }}" />
+        <div class="bg-gray-50 hover:bg-gray-100 rounded text-center flex flex-col mb-10">
+          <div class="flex justify-center w-full">
+            <img src="{{ pokemon.img }}" alt="{{ pokemon.name }}" class="h-32" />
+          </div>
+          <div class="flex flex-col py-0 px-4 h-full">
+            <strong class="text-sm mt-4">{{ pokemon.name }}</strong>
+            <div class="flex flex-col mt-2 gap-1">
+              @for(type of pokemon.type; track type.id) {
+                <span class="text-sm">{{ type }}</span>
+              }
+            </div>
+          </div>
         </div>
         }
       </div>
