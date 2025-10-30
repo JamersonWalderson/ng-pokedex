@@ -1,3 +1,15 @@
-<h1 class="text-xl font-bold underline">
-  Hello world!
-</h1>
+<div class="@container">
+  <div class="mt-4">
+    <h2 class="text-lg font-bold mb-2">Pokémons</h2>
+    <div>
+      <div class="grid grid-cols-4 gap-4 p-4">
+        @for(pokemon of data().pokemon; track pokemon.id) {
+        <div class="bg-gray-200 p-4 rounded text-center flex flex-col">
+          <h3>{{ pokemon.name }}</h3>
+          <img src="{{ pokemon.img }}" alt="{{ pokemon.name }}" />
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
