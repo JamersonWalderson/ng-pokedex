@@ -1,6 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Pokemon } from './services/pokemon';
+import { injectQuery } from '@tanstack/angular-query-experimental';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,11 @@ import { Pokemon } from './services/pokemon';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('ng-pokedex');
-  private pokemonService = inject(Pokemon);
-  protected data = signal<any>(null);
+  protected readonly title = 'ng-pokedex';
+  protected pokemonService = inject(Pokemon);
   
-  constructor() {
-    this.pokemonService.all().subscribe((result) => {
-      this.data.set(result);
-    });
-  }
+  query = injectQuery(() => ({
+    queryKey: ['todos'],
+    queryFn: () => this.pokemonService.all(),
+  }))
 }

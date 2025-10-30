@@ -1,9 +1,18 @@
 <div class="@container">
-  <div class="mt-4">
+  @if (query.isPending()) {
+    <div class="flex justify-center items-center h-screen bg-yellow-200">
+       <img src="./pokemon.png" alt="">
+    </div>
+    }
+  @if (query.isError()) {
+    <div class="flex justify-center items-center h-screen bg-red-200">Error</div>
+    }
+  @if (query.isSuccess()) {
+    <div class="mt-4">
     <h2 class="text-lg font-bold mb-2">Pokémons</h2>
     <div>
       <div class="grid grid-cols-2 md:grid-cols-6 gap-4 p-4">
-        @for(pokemon of data().pokemon; track pokemon.id) {
+        @for(pokemon of query.data()?.pokemon; track pokemon.id) {
         <div class="bg-gray-50 hover:bg-gray-100 hover:shadow-lg rounded text-center flex flex-col mb-10 h-[15rem]">
           <div class="flex justify-center w-full">
             <img src="{{ pokemon.img }}" alt="{{ pokemon.name }}" class="h-32 hover:scale-150 transition-all duration-300" />
@@ -21,4 +30,5 @@
       </div>
     </div>
   </div>
+  }
 </div>
